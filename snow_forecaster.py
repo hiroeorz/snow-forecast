@@ -133,48 +133,51 @@ class SnowForecast:
         else:
             print("雪は積もらないです")
 
-forecaster = SnowForecast()
-forecaster.train()
-
-# 日付を指定して、学習に使用したパラメータを与えて判定する。
-forecaster.judge("2006/2/19 00:00:00")
-forecaster.judge("2012/2/2 00:00:00")
-forecaster.judge("2014/2/2 13:00:00")
-forecaster.judge("2015/2/28 00:00:00")
-
-#######################################
-# パラメータを直接与えて予測させてみる。
-#######################################
-print("------")
-temp = 0.0
-precipitation = 0
-temp_yeaterday = 3.0
-accumulation_yesterday = 2 
-result = forecaster.predict(temp, precipitation, temp_yeaterday, accumulation_yesterday)
-print("[温度:%s] [降水量:%s] [昨日の温度:%s] [昨日の積雪量:%s]" %
-      (temp, precipitation, temp_yeaterday, accumulation_yesterday))
-
-print("判定結果: %s" % result)
-
-if result == 1:
-    print("雪が積もります")
-else:
-    print("雪は積もらないです")
-
-#########################################################
-# パラメータを直接与えて予測させてみる(昨日の温度を-3.0℃に変更)。
-#########################################################
-print("------")
-temp_yeaterday = -3.0
-result = forecaster.predict(temp, precipitation, temp_yeaterday, accumulation_yesterday)
-print("[温度:%s] [降水量:%s] [昨日の温度:%s] [昨日の積雪量:%s]" %
-      (temp, precipitation, temp_yeaterday, accumulation_yesterday))
-
-print("判定結果: %s" % result)
-
-if result == 1:
-    print("雪が積もります")
-else:
-    print("雪は積もらないです")
-
-print("------")
+if __name__ == "__main__":
+    forecaster = SnowForecast()
+    forecaster.train()
+    
+    #####################################################
+    # 日付を指定して、学習に使用したパラメータを与えて判定する。
+    #####################################################
+    forecaster.judge("2006/2/19 00:00:00")
+    forecaster.judge("2012/2/2 00:00:00")
+    forecaster.judge("2014/2/2 13:00:00")
+    forecaster.judge("2015/2/28 00:00:00")
+    
+    #######################################
+    # パラメータを直接与えて予測させてみる。
+    #######################################
+    print("------")
+    temp = 0.0
+    precipitation = 0
+    temp_yeaterday = 3.0
+    accumulation_yesterday = 2 
+    result = forecaster.predict(temp, precipitation, temp_yeaterday, accumulation_yesterday)
+    print("[温度:%s] [降水量:%s] [昨日の温度:%s] [昨日の積雪量:%s]" %
+          (temp, precipitation, temp_yeaterday, accumulation_yesterday))
+    
+    print("判定結果: %s" % result)
+    
+    if result == 1:
+        print("雪が積もります")
+    else:
+        print("雪は積もらないです")
+        
+    #########################################################
+    # パラメータを直接与えて予測させてみる(昨日の温度を-3.0℃に変更)。
+    #########################################################
+    print("------")
+    temp_yeaterday = -3.0
+    result = forecaster.predict(temp, precipitation, temp_yeaterday, accumulation_yesterday)
+    print("[温度:%s] [降水量:%s] [昨日の温度:%s] [昨日の積雪量:%s]" %
+          (temp, precipitation, temp_yeaterday, accumulation_yesterday))
+    
+    print("判定結果: %s" % result)
+    
+    if result == 1:
+        print("雪が積もります")
+    else:
+        print("雪は積もらないです")
+        
+    print("------")
