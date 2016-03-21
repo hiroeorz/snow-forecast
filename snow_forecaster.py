@@ -88,15 +88,18 @@ class SnowForecast:
         u"""各学習モデルのタイプ別にスコアを計算し、もっともスコアの高いタイプのオブジェクトをインスタンス変数にとっておく."""
         features = self._features()
         labels = self._labels()
-        lsa = TruncatedSVD(2)
-        reduced_features = lsa.fit_transform(features)
+
+        # 今回は特徴量の算出に4量しか使わないので特徴量の削減は行わない。よって以下はコメントにしておく。
+        # lsa = TruncatedSVD(3)
+        # reduced_features = lsa.fit_transform(features)
+
         best = LinearSVC()
         best_name = self.CLF_NAMES[0]
         best_score = 0
 
         for clf_name in self.CLF_NAMES:
             clf    = eval("%s()" % clf_name) 
-            scores = cross_val_score(clf,reduced_features, labels,cv=5)
+            scores = cross_val_score(clf, features, labels, cv=5) # 特徴量削減した場合は reduced_features を使う
             score  = sum(scores) / len(scores)  #モデルの正解率を計測
             print("%sのスコア:%s" % (clf_name,score))
             if score >= best_score:
